@@ -8,8 +8,9 @@
 #   date     : 2019-12-13 上午 11:01
 #   desc     : 
 # =====================================================
-import json
-import requests
+from json import loads
+from requests import get,post
+
 
 
 class Smms:
@@ -24,9 +25,9 @@ class Smms:
         """
         url = 'https://sm.ms//api/v2/token'
         data = {'username': username, 'password': password}
-        re = requests.post(url, data=data)
-        if json.loads(re.content)['success']:
-            token = json.loads(re.content)['data']['token']
+        re = post(url, data=data)
+        if loads(re.content)['success']:
+            token = loads(re.content)['data']['token']
             return token
         else:
             raise KeyError
@@ -44,10 +45,10 @@ class Smms:
         files = {'smfile': open(image, 'rb')}
         headers = {'Authorization': token}
         if token:
-            re = requests.post(url, headers=headers, files=files, params=params)
+            re = post(url, headers=headers, files=files, params=params)
         else:
-            re = requests.post(url, files=files, params=params)
-        re_json = json.loads(re.text)
+            re = post(url, files=files, params=params)
+        re_json = loads(re.text)
         try:
             if re_json['success']:
                 return re_json['data']['url']
@@ -56,6 +57,8 @@ class Smms:
         except KeyError:
             if re_json['code'] == 'unauthorized':
                 raise ConnectionRefusedError
+            if re_json['code'] == 'flood':
+                raise ConnectionAbortedError
 
     @classmethod
     def get_history(cls, token):
@@ -67,8 +70,8 @@ class Smms:
         url = 'https://sm.ms/api/v2/upload_history'
         params = {'format': 'json', 'ssl': True}
         headers = {'Authorization': token}
-        re = requests.get(url, headers=headers, params=params)
-        re_json = json.loads(re.text)
+        re = get(url, headers=headers, params=params)
+        re_json = loads(re.text)
         try:
             if re_json['success']:
                 return re_json['data']
@@ -86,8 +89,8 @@ class Smms:
         """
         url = 'https://sm.ms/api/v2/history'
         params = {'format': 'json', 'ssl': True}
-        re = requests.get(url, params=params)
-        re_json = json.loads(re.text)
+        re = get(url, params=params)
+        re_json = loads(re.text)
         if re_json['success']:
             return re_json['data']
         else:

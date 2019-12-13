@@ -10,14 +10,15 @@
 # =====================================================
 
 
-import os
-import threading
-import webbrowser
+from os import path,remove
+
+from threading import Timer,Thread
+from webbrowser import open as openweb
 
 import wx
 import wx.adv
 import yaml
-from threading import Thread
+
 from PIL import ImageGrab
 from pynput import keyboard
 from pyperclip import copy
@@ -82,8 +83,8 @@ def get_pic_from_clipboard(window):
         ThreadUpload(image, token, window)
 
         try:
-            if os.path.exists('image.png'):
-                os.remove('image.png')
+            if path.exists('image.png'):
+                remove('image.png')
         except PermissionError:
             pass
 
@@ -153,7 +154,9 @@ class ThreadUpload(Thread):
             copy(url)
             wx.CallAfter(self.window.UploadSuccess)
         except ConnectionRefusedError:
-            wx.CallAfter(self.window.LoginAgain, self)
+            wx.CallAfter(self.window.LoginAgain)
+        except ConnectionAbortedError:
+            wx.CallAfter(self.window.UploadMax)
 
 
 # class ThreadUpload(Thread):
@@ -228,6 +231,10 @@ class MyTaskBarIcon(wx.adv.TaskBarIcon):
         self.frame4.Center()
         self.frame4.Show(False)
 
+        self.frame5 = Trans(parent=None, title='每分钟限制上传10张，请等待冷却', size=(200, 20))
+        self.frame5.Center()
+        self.frame5.Show(False)
+
     # “关于”选项的事件处理器
     def onAbout(self, event):
         wx.MessageBox('Author：Jack Wang\nEmail Address：544907049@qq.com\nLatest Update：2019-12-13', "info")
@@ -276,7 +283,7 @@ class MyTaskBarIcon(wx.adv.TaskBarIcon):
             wx.MessageBox('密码或账号错误', "警告")
 
     def on_but_register(self, event):
-        webbrowser.open('https://sm.ms/register')
+        openweb('https://sm.ms/register')
 
     def LoginAgain(self):  # 删除线程
         wx.MessageBox('登录已失效，需重新登录', "警告")
@@ -288,7 +295,7 @@ class MyTaskBarIcon(wx.adv.TaskBarIcon):
             timer.cancel()
 
         self.frame2.Show(True)
-        timer = threading.Timer(2.0, timestop)
+        timer = Timer(2.0, timestop)
         timer.start()
 
     def UploadSuccess(self):
@@ -297,7 +304,7 @@ class MyTaskBarIcon(wx.adv.TaskBarIcon):
             timer.cancel()
 
         self.frame3.Show(True)
-        timer = threading.Timer(2.0, timestop)
+        timer = Timer(2.0, timestop)
         timer.start()
 
     def UploadFailed(self):
@@ -306,7 +313,16 @@ class MyTaskBarIcon(wx.adv.TaskBarIcon):
             timer.cancel()
 
         self.frame4.Show(True)
-        timer = threading.Timer(2.0, timestop)
+        timer = Timer(2.0, timestop)
+        timer.start()
+
+    def UploadMax(self):
+        def timestop():
+            self.frame5.Show(False)
+            timer.cancel()
+
+        self.frame5.Show(True)
+        timer = Timer(5.0, timestop)
         timer.start()
 
 
