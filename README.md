@@ -1,2 +1,3 @@
 # SMPIC
-Convenient and free image-hosting software for Windows using SM.MS API
+利用SM.MS的API制作的Windows下的便捷免费图床软件
+
