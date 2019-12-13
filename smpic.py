@@ -221,7 +221,7 @@ class MyTaskBarIcon(TaskBarIcon):
         self.frame4.Center()
         self.frame4.Show(False)
 
-        self.frame5 = Trans(parent=None, title='每分钟限制上传10张，请等待冷却', size=(200, 20))
+        self.frame5 = Trans(parent=None, title='每分钟限制上传20张，请等待冷却', size=(200, 20))
         self.frame5.Center()
         self.frame5.Show(False)
 
