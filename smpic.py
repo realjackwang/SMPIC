@@ -180,7 +180,7 @@ class MyTaskBarIcon(wx.adv.TaskBarIcon):
     ID_EXIT = wx.NewIdRef()  # 菜单选项“退出”的ID
     ID_UPLOAD = wx.NewIdRef()  # 菜单选项“显示页面”的ID
     ID_LOGIN = wx.NewIdRef()  # 菜单选项“显示页面”的ID
-    TITLE = "MDPIC"  # 鼠标移动到图标上显示的文字
+    TITLE = "SMPIC"  # 鼠标移动到图标上显示的文字
 
     def __init__(self):
         wx.adv.TaskBarIcon.__init__(self)
