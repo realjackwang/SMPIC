@@ -16,7 +16,7 @@ from threading import Timer, Thread
 from webbrowser import open as openweb
 
 from wx import Frame, CallAfter, StaticText, NewIdRef, Icon, Panel, TextCtrl, Button, MessageBox, Exit, Menu, App
-from wx import EVT_MENU, STAY_ON_TOP, TE_PASSWORD, EVT_BUTTON
+from wx import EVT_MENU, STAY_ON_TOP, TE_PASSWORD, EVT_BUTTON, EVT_CLOSE
 from wx.adv import TaskBarIcon
 
 import yaml
@@ -165,6 +165,15 @@ class Trans(Frame):
         self.SetTransparent(100)  # 设置透明
 
 
+#
+# class NoCloseFrame(Frame):
+#     def __init__(self, **kwargs):
+#         Frame.__init__(self, **kwargs)
+#
+#     def Close(self, force=False):
+#         self.Show(False)
+
+
 class MyTaskBarIcon(TaskBarIcon):
     ICON = "logo.ico"  # 图标地址
     ID_ABOUT = NewIdRef()  # 菜单选项“关于”的ID
@@ -182,6 +191,7 @@ class MyTaskBarIcon(TaskBarIcon):
         self.Bind(EVT_MENU, self.OnLogin, id=self.ID_LOGIN)
 
         self.frame = Frame(parent=None, title='登录', size=(285, 160))
+        self.frame.Bind(EVT_CLOSE, lambda event: self.frame.Show(False))
 
         panel = Panel(self.frame, -1)
         label_user = StaticText(panel, -1, "账号:", pos=(10, 10))
@@ -240,7 +250,8 @@ class MyTaskBarIcon(TaskBarIcon):
         get_pic_from_clipboard(self)
 
     def OnLogin(self, event):
-        self.frame.Show()
+        self.frame.Show(True)
+
 
     # 创建菜单选项
     def CreatePopupMenu(self):
@@ -269,11 +280,11 @@ class MyTaskBarIcon(TaskBarIcon):
                     yaml.dump(config, f, default_flow_style=False, encoding='utf-8', allow_unicode=True)
             self.frame.Show(False)
             MessageBox('登陆成功！\n'
-                '使用方法：\n1.首先复制一张图片，本地的或者网\n'
-                '页上的，或者使用截图工具截图；\n'
-                '2.随后按' + hotkeys + '上传；\n'
-                                    '3.成功后会返回url至你的剪贴板。\n\n提示：\n可编辑config.yml修改快捷键',
-                "温馨提示")
+                       '使用方法：\n1.首先复制一张图片，本地的或者网\n'
+                       '页上的，或者使用截图工具截图；\n'
+                       '2.随后按' + hotkeys + '上传；\n'
+                                           '3.成功后会返回url至你的剪贴板。\n\n提示：\n可编辑config.yml修改快捷键',
+                       "温馨提示")
         except KeyError:
             MessageBox('密码或账号错误', "警告")
 
@@ -291,7 +302,7 @@ class MyTaskBarIcon(TaskBarIcon):
                 '使用方法：\n1.首先复制一张图片，本地的或者网\n'
                 '页上的，或者使用截图工具截图；\n'
                 '2.随后按' + hotkeys + '上传；\n'
-                '3.成功后会返回url至你的剪贴板。\n\n提示：\n1.免登录使用将无法在线查看你的全部上\n传记录，仅可查看本IP的上传记录\n2.可编辑config.yml修改快捷键',
+                                    '3.成功后会返回url至你的剪贴板。\n\n提示：\n1.免登录使用将无法在线查看你的全部上\n传记录，仅可查看本IP的上传记录\n2.可编辑config.yml修改快捷键',
                 "温馨提示")
         except KeyError:
             MessageBox('出现了未知问题，请提交issue', "警告")
