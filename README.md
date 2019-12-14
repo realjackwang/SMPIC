@@ -19,3 +19,18 @@
   <img src="https://img-blog.csdnimg.cn/20191214135533479.gif" width=600 height=400 alt="">
 </div>
 
+### 赞助
+
+如果你喜欢 SmPic 并且它对你确实有帮助，欢迎给我打赏一杯咖啡哦
+
+支付宝：
+
+![](https://i.loli.net/2019/12/14/ok8sdr4SIAYjuGP.png)
+
+微信：
+
+![](https://i.loli.net/2019/12/14/ok8sdr4SIAYjuGP.png)
+
+### License
+
+None
