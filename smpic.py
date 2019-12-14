@@ -266,10 +266,10 @@ class MyTaskBarIcon(TaskBarIcon):
 
     # 获取菜单的属性元组
     def getMenuAttrs(self):
-        return [('Upload Clipboard To SM.MS', self.ID_UPLOAD),
-                ('Login', self.ID_LOGIN),
-                ('Info', self.ID_ABOUT),
-                ('Exit', self.ID_EXIT)]
+        return [('上传剪贴板至SM.MS', self.ID_UPLOAD),
+                ('登录', self.ID_LOGIN),
+                ('关于', self.ID_ABOUT),
+                ('退出', self.ID_EXIT)]
 
     def on_but_login(self, event):
         username = self.entry_user.GetValue()
