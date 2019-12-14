@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Molunerfinn/test/master/picgo/New%20LOGO-150.png" alt="">
+  <img src="https://i.loli.net/2019/12/14/WJIAECguzBv71Np.png" alt="">
   <h1>SmPic</h1>
   <blockquote>利用SM.MS的API制作的Windows下的便捷免费图床软件 </blockquote>
 </div>
