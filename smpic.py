@@ -55,6 +55,8 @@ def init_config():
             hotkey = config['hotkey'].lower().split('+')
             hotkeys = config['hotkey'].lower()
             token = config['token']
+            if token == 'not login':
+                token = None
 
             for i in range(len(hotkey)):
                 hotkey[i] = keycode[hotkey[i]]
@@ -86,6 +88,9 @@ def get_pic_from_clipboard(window):
         return True
     except AttributeError:
         return False
+    except IndexError:
+        return False
+
 
 
 class ThreadKey(Thread):
@@ -251,7 +256,6 @@ class MyTaskBarIcon(TaskBarIcon):
 
     def OnLogin(self, event):
         self.frame.Show(True)
-
 
     # 创建菜单选项
     def CreatePopupMenu(self):
