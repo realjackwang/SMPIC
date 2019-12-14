@@ -25,11 +25,15 @@
 
 支付宝：
 
-![](https://i.loli.net/2019/12/14/ok8sdr4SIAYjuGP.png)
+<div align="left">
+  <img src="https://i.loli.net/2019/12/14/ok8sdr4SIAYjuGP.png" width=100 height=100 alt="">
+</div>
 
 微信：
 
-![](https://i.loli.net/2019/12/14/ok8sdr4SIAYjuGP.png)
+<div align="left">
+  <img src="https://i.loli.net/2019/12/14/ok8sdr4SIAYjuGP.png" width=100 height=100 alt="">
+</div>
 
 ### :page_facing_up: License
 
