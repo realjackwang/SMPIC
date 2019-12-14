@@ -266,7 +266,7 @@ class MyTaskBarIcon(TaskBarIcon):
 
     # 获取菜单的属性元组
     def getMenuAttrs(self):
-        return [('Upload Clipboard To GitHub', self.ID_UPLOAD),
+        return [('Upload Clipboard To SM.MS', self.ID_UPLOAD),
                 ('Login', self.ID_LOGIN),
                 ('Info', self.ID_ABOUT),
                 ('Exit', self.ID_EXIT)]
