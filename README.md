@@ -15,4 +15,7 @@
 
 ### :gift: 使用方法
 
-![动图展示](https://img-blog.csdnimg.cn/20191214135533479.gif)
+<div align="center">
+  <img src="https://img-blog.csdnimg.cn/20191214135533479.gif" width=600 height=400 alt="">
+</div>
+
