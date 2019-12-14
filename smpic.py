@@ -15,7 +15,8 @@ from os import path, remove
 from threading import Timer, Thread
 from webbrowser import open as openweb
 
-from wx import Frame, CallAfter, StaticText, NewIdRef, Icon, Panel, TextCtrl, Button, MessageBox, Exit, Menu, App
+from wx import Frame, CallAfter, StaticText, NewIdRef, Icon, Panel, TextCtrl, Button, MessageBox, Exit, Menu, App, \
+    GetMousePosition
 from wx import EVT_MENU, STAY_ON_TOP, TE_PASSWORD, EVT_BUTTON, EVT_CLOSE
 from wx.adv import TaskBarIcon
 
@@ -90,7 +91,6 @@ def get_pic_from_clipboard(window):
         return False
     except IndexError:
         return False
-
 
 
 class ThreadKey(Thread):
@@ -319,6 +319,9 @@ class MyTaskBarIcon(TaskBarIcon):
         self.frame.Show(True)
 
     def Uploading(self):
+        pos = GetMousePosition()
+        pos = (pos[0] + 15, pos[1])
+        self.frame2.SetPosition(pos)
         def timestop():
             self.frame2.Show(False)
             timer.cancel()
@@ -328,6 +331,9 @@ class MyTaskBarIcon(TaskBarIcon):
         timer.start()
 
     def UploadSuccess(self):
+        pos = GetMousePosition()
+        pos = (pos[0] + 15, pos[1])
+        self.frame3.SetPosition(pos)
         def timestop():
             self.frame3.Show(False)
             timer.cancel()
@@ -337,6 +343,9 @@ class MyTaskBarIcon(TaskBarIcon):
         timer.start()
 
     def UploadFailed(self):
+        pos = GetMousePosition()
+        pos = (pos[0] + 15, pos[1])
+        self.frame4.SetPosition(pos)
         def timestop():
             self.frame4.Show(False)
             timer.cancel()
@@ -346,6 +355,9 @@ class MyTaskBarIcon(TaskBarIcon):
         timer.start()
 
     def UploadMax(self):
+        pos = GetMousePosition()
+        pos = (pos[0]+15,pos[1])
+        self.frame5.SetPosition(pos)
         def timestop():
             self.frame5.Show(False)
             timer.cancel()
