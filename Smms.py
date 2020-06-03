@@ -23,7 +23,7 @@ class Smms:
         :param password: 密码
         :return: API Token
         """
-        url = 'https://sm.ms//api/v2/token'
+        url = 'https://sm.ms/api/v2/token'
         data = {'username': username, 'password': password}
         re = post(url, data=data)
         if loads(re.content)['success']:
@@ -40,7 +40,7 @@ class Smms:
         :param token: API Token
         :return: 返回图片上传后的URL
         """
-        url = 'https://sm.ms/api/upload'
+        url = 'https://sm.ms/api/v2/upload'
         params = {'format': 'json', 'ssl': True}
         files = {'smfile': open(image, 'rb')}
         headers = {'Authorization': token}
