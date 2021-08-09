@@ -11,7 +11,7 @@ PyInstaller==3.5
 pynput==1.6.0
 pyperclip==1.7.0
 pypiwin32==223
-pywin32==227
+pywin32==301
 pywin32-ctypes==0.2.0
 PyYAML==5.2
 requests==2.22.0
